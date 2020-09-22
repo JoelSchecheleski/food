@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food/models/category.dart';
-import 'package:food/screens/categories_mels_screen.dart';
+import 'package:food/screens/categories_meals_screen.dart';
+import 'package:food/utils/app-routes.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category category;
@@ -9,18 +10,17 @@ class CategoryItem extends StatelessWidget {
 
   /// Navegação entre os itens de uma categoria e as receitas de uma categoria
   void _selectCategory(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) {
-          return CategoriesMealsScreen();
-        },
-      ),
+    /// Navegação nomeada
+    Navigator.of(context).pushNamed(
+      AppRoutes.CATEGORIES_MEALS,
+      arguments: category
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell( /// envolvido container com InkWell para usar o onTap e poder navegar para uma outra tela
+    return InkWell(
+      /// envolvido container com InkWell para usar o onTap e poder navegar para uma outra tela
       onTap: () => _selectCategory(context),
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(15),
