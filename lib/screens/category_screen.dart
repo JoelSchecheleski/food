@@ -1,0 +1,21 @@
+import 'package:flutter/material.dart';
+
+class CategoriesScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GridView(
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent( // delega ao MaxCrossAsis a quantidade de elementos por linha
+        maxCrossAxisExtent: 200,
+        childAspectRatio: 3 / 2, // proporção
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20
+      ),
+      children: <Widget>[
+        //
+        Card(
+          child: Text('Olá'),
+        )
+      ],
+    );
+  }
+}
