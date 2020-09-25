@@ -30,8 +30,14 @@ class MyApp extends StatelessWidget {
         AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(),
         AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
       },
+      onGenerateRoute: (settings) {
+        // Resolve as rotas dinamicamente
+        return null;
+      },
+      onUnknownRoute: (settings) {
+        // Em casp de rotas não existe pode tentar resolver por aqui também
+        return null;
+      },
     );
-
-
   }
 }
