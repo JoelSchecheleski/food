@@ -87,7 +87,7 @@ class MealDetailScreen extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).pop(
             // Passa o resultado para a tela anterior
-            meal.title
+            meal.id
           );
         },
       ),
