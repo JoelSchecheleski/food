@@ -9,8 +9,15 @@ class MealItem extends StatelessWidget {
   const MealItem(this.meal);
 
   void _selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(AppRoutes.MEAL_DETAIL,
-    arguments: meal
+    Navigator.of(context).pushNamed(AppRoutes.MEAL_DETAIL, arguments: meal)
+    .then((result) => {
+    // retorna os dados da tela que foi fechada
+      if (result == null) {
+          print('Sem resultado')
+      } else {
+        print(result)
+        }
+      }
     );
   }
 
