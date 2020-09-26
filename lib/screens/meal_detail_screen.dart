@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:food/models/meal.dart';
+
+import '../models/meal.dart';
 
 class MealDetailScreen extends StatelessWidget {
-  _createSectionTitle(BuildContext context, String title) {
+
+  final Function(Meal) onToggleFavorite;
+  final bool Function(Meal) isFavorite;
+
+  const MealDetailScreen(this.onToggleFavorite, this.isFavorite);
+
+  Widget _createSectionTitle(BuildContext context, String title) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Text(
@@ -37,7 +44,7 @@ class MealDetailScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: <Widget>[
             Container(
               height: 300,
               width: double.infinity,
@@ -47,7 +54,8 @@ class MealDetailScreen extends StatelessWidget {
               ),
             ),
             _createSectionTitle(context, 'Ingredientes'),
-            _createSectionContainer(ListView.builder(
+            _createSectionContainer(
+              ListView.builder(
                 itemCount: meal.ingredients.length,
                 itemBuilder: (ctx, index) {
                   return Card(
@@ -60,35 +68,35 @@ class MealDetailScreen extends StatelessWidget {
                     ),
                     color: Theme.of(context).accentColor,
                   );
-                })),
+                },
+              ),
+            ),
             _createSectionTitle(context, 'Passos'),
             _createSectionContainer(
               ListView.builder(
-                  itemCount: meal.steps.length,
-                  itemBuilder: (ctx, index){
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: CircleAvatar(
-                            child: Text('${index + 1}'),
-                          ),
-                          title: Text(meal.steps[index]),
+                itemCount: meal.steps.length,
+                itemBuilder: (ctx, index) {
+                  return Column(
+                    children: <Widget>[
+                      ListTile(
+                        leading: CircleAvatar(
+                          child: Text('${index + 1}'),
                         ),
-                        Divider(),
-                      ],
-                    );
-                  })
+                        title: Text(meal.steps[index]),
+                      ),
+                      Divider(),
+                    ],
+                  );
+                },
+              ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.star),
+        child: Icon(isFavorite(meal) ? Icons.star : Icons.star_border),
         onPressed: () {
-          Navigator.of(context).pop(
-            // Passa o resultado para a tela anterior
-            meal.id
-          );
+          onToggleFavorite(meal);
         },
       ),
     );

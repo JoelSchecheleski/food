@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:food/componentes/meals_item.dart';
-import 'package:food/data/dummy_data.dart';
-import 'package:food/models/category.dart';
+
+import '../components/meal_item.dart';
+import '../models/category.dart';
+import '../models/meal.dart';
 
 class CategoriesMealsScreen extends StatelessWidget {
 
-//  final Category category;
-//  const CategoriesMealsScreen(this.category); /// Recebe no construtor os dados que serão apresentados
+  final List<Meal> meals;
+
+  const CategoriesMealsScreen(this.meals);
 
   @override
   Widget build(BuildContext context) {
-    /// atributo category vindo de arguments
-    final category = ModalRoute.of(context).settings.arguments as Category; // cast
+    final category = ModalRoute.of(context).settings.arguments as Category;
 
-    final categoryMeals = DUMMY_MEALS.where((meals) {
-      return meals.categories.contains(category.id);
+    final categoryMeals = meals.where((meal) {
+      return meal.categories.contains(category.id);
     }).toList();
 
     return Scaffold(

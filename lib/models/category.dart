@@ -9,8 +9,6 @@ class Category {
   const Category({
     @required this.id,
     @required this.title,
-    this.color,
+    this.color = Colors.orange,
   });
-
-
 }
